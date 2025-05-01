@@ -1,28 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>My Chatbot Project</title>
+<head>
+    <title>Enhanced Chatbot</title>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
-   
 </head>
-  <body>
 <body>
+  <div class="theme-toggle">
+    <i class="fas fa-moon"></i>
+  </div>
   <div class="card">
     <div id="header">
-      <h1>Welcome to My chatbot</h1>
+      <div class="bot-avatar">
+        <i class="fas fa-robot"></i>
+      </div>
+      <div>
+        <h1>TChat</h1>
+        <p class="status">Online</p>
+      </div>
     </div>
     <div id="message-section">
-      <div class="message" id="bot"><span id="bot-response">Hello.. I'm listening! Go on..</span></div>
+      <div class="message" id="bot">
+        <span id="bot-response">Hello! I'm your enhanced chatbot. How can I help you today?</span>
+      </div>
+    </div>
+    <div class="typing-indicator">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
     <div id="input-section">
-      <input id="input" type="text" placeholder="Type a message here..." autocomplete="off" autofocus="autofocus"/>
-      <button class="send" onclick="sendMessage()" >
-        <div class="circle"><i class="zmdi zmdi-mail-send"></i><span>Send</span></div>
-      </button>
+      <button class="emoji-btn" id="emoji-btn">😊</button>
+      <input id="input" type="text" placeholder="Type a message here..." autocomplete="off" />
+      <div class="send-btn" onclick="sendMessage()">
+        <i class="fas fa-paper-plane"></i>
+      </div>
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/@emoji-mart/data"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emoji-mart/js"></script>
   <script src="script.js"></script>
 </body>
 </html>
