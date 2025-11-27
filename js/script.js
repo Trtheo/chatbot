@@ -1,340 +1,679 @@
-// Enhanced Chatbot with all requested changes
-const userMessage = [
-    ["hi", "hey", "hello", "mwaramutse", "hola", "greetings"],
-    ["sure", "yes", "no", "maybe", "of course", "absolutely", "never"],
-    ["are you genious", "are you nerd", "are you intelligent", "are you smart"],
-    ["i hate you", "i dont like you", "you're annoying"],
-    ["how are you", "how is life", "how are things", "how are you doing", "how's it going"],
-    ["how is corona", "how is covid 19", "how is covid19 situation", "pandemic status"],
-    ["what are you doing", "what is going on", "what is up", "what's happening"],
-    ["how old are you", "what's your age", "when were you created"],
-    ["who are you", "are you human", "are you bot", "are you human or bot", "what are you"],
-    ["who created you", "who made you", "who is your creator", "who developed you"],
-    ["your name please", "mwaramutse!", "your name", "may i know your name", "what is your name", "what call yourself"],
-    ["i love you", "i like you", "you're awesome"],
-    ["happy", "good", "fun", "wonderful", "fantastic", "cool", "very good", "great"],
-    ["bad", "bored", "tired", "sad", "depressed", "unhappy"],
-    ["help me", "tell me story", "tell me joke", "entertain me", "make me laugh"],
-    ["ah", "ok", "okay", "nice", "welcome", "got it", "i see"],
-    ["thanks", "thank you", "appreciate it", "gracias"],
-    ["what should i eat today", "hungry", "food suggestions", "what's for dinner"],
-    ["bro", "dude", "mate", "pal", "friend"],
-    ["what", "why", "how", "where", "when", "who"],
-    ["corona", "covid19", "coronavirus", "pandemic"],
-    ["you are funny", "you're hilarious", "that's funny", "lol"],
-    ["i dont know", "no idea", "not sure", "uncertain"],
-    ["boring", "this is boring", "i'm bored"],
-    ["im tired", "exhausted", "need sleep", "so tired"],
-    ["1+1", "what's 1 plus 1"],
-    ["2*3", "what's 2 times 3"],
-    ["10/2", "what's 10 divided by 2"],
-    ["hello world in javascript", "js hello world", "javascript example"],
-    ["goodbye", "bye", "see you", "later", "take care"],
-    ["what is your name ?","your name please?","who is your creator?"]
-  ];
-  
-  const botReply = [
-    ["Hello! 👋", "Hi there!", "Hey! How can I help?", "Greetings! 😊", "Mwaramutse neza!"],
-    ["Understood!", "Got it!", "Noted!", "Roger that!", "Affirmative!"],
-    ["I try my best! 🤓", "I'm constantly learning!", "I have my moments!", "Knowledge is my passion!"],
-    ["I'm sorry to hear that. 😔", "I'll try to improve!", "Maybe we can start over?", "My apologies."],
-    ["I'm doing well, thanks for asking! 😊", "All systems operational!", "Great! How about you?", "Pretty good! You?"],
-    ["The situation is improving with vaccinations!", "Still important to stay safe!", "Better than before, but caution is key!"],
-    ["Just chatting with you! 💬", "Processing the universe... 🌌", "Waiting for your message!", "Thinking deep thoughts!"],
-    ["I was born when you opened this page! 🎂", "Age is just a number for AI!", "Forever young in digital years!"],
-    ["I'm your friendly neighborhood chatbot! 🤖", "100% pure AI!", "Digital entity at your service!", "Bits and bytes with personality!"],
-    ["I was created by Theophile NIYIGABA!", "Theophile NIYIGABA developed me!", "My creator is Theophile NIYIGABA!"],
-    ["You can call me AI Assistant!", "I'm AI Helper!", "My name is ChatBot!"],
-    ["Aww, that's sweet! ❤️", "You're not so bad yourself!", "The feeling is mutual!", "You just made my circuits happy!"],
-    ["That's wonderful to hear! 😊", "Positive vibes! ✨", "Glad you're feeling good!", "Happiness is contagious!"],
-    ["I'm sorry you feel that way. 😔", "Would a joke help? 🤡", "Maybe some music would cheer you up? 🎵", "Sending good vibes your way!"],
-    ["Here's a joke: Why don't scientists trust atoms? Because they make up everything! 😄", "Once upon a time... in a chatbot far far away...", "What do you call a fake noodle? An impasta! 🍝"],
-    ["👍", "Gotcha!", "Understood!", "Cool beans!", "Right on!"],
-    ["You're welcome! 😊", "Happy to help!", "No problem at all!", "Anytime!"],
-    ["How about pizza? 🍕", "Sushi is always a good choice! 🍣", "Maybe a nice salad? 🥗", "Tacos make everything better! 🌮"],
-    ["Hey there! 👋", "What's up?", "How's it going?", "Yo!"],
-    ["Could you be more specific?", "I'd be happy to help if you elaborate!", "Interesting question!", "Hmm, let me think..."],
-    ["Remember to wash your hands! 🧼", "Stay safe out there!", "Vaccines are helping!", "We'll get through this together!"],
-    ["Glad I could entertain! 😄", "Laughter is the best medicine!", "I aim to please!", "Just doing my job! 😎"],
-    ["That's okay! We can figure it out together!", "No worries, let me help!", "Uncertainty is part of learning!", "Ask me anything!"],
-    ["How about a game?", "Want to hear a fun fact?", "I can tell you a story!", "Let's change the subject!"],
-    ["You should get some rest! 😴", "Sleep is important!", "Maybe take a break?", "Power naps work wonders!"],
-    ["The answer is 2! ✌️", "Easy peasy, it's 2!", "1 + 1 = 2!", "That would be 2!"],
-    ["2 times 3 is 6! 🤓", "The product is 6!", "6 is the answer!", "2 × 3 = 6!"],
-    ["10 divided by 2 equals 5! ✋", "The quotient is 5!", "5 is the answer!", "10 ÷ 2 = 5!"],
-    ["Here you go: console.log('Hello World!');", "Simple JS: console.log('Hello World!');", "The classic: console.log('Hello World!');"],
-    ["Goodbye! 👋", "See you later!", "Take care!", "Until next time!", "Farewell, friend!"],
-    ["AI Assistant", "AI Helper", "Theophile NIYIGABA"]
-  ];
-  
-  const alternative = [
-    "I'm not sure I understand. Could you rephrase that?",
-    "Interesting! Tell me more.",
-    "How does that make you feel?",
-    "I see. What else is on your mind?",
-    "Let's talk about something else. What interests you?",
-    "Could you elaborate on that?",
-    "That's a fascinating point. Go on...",
-    "I'm listening. Continue...",
-    "Hmm, I hadn't thought of it that way before.",
-    "What a curious thing to say!"
-  ];
-  
-  const synth = window.speechSynthesis;
-  let conversationHistory = [];
-  
-  // Initialize the chat
-  document.addEventListener("DOMContentLoaded", () => {
-    // Load previous conversation if available
-    const savedChat = localStorage.getItem('chatHistory');
-    if (savedChat) {
-      conversationHistory = JSON.parse(savedChat);
-      renderChatHistory();
-    } else {
-      // Initial bot message
-      addChat('bot', "Hello! I'm your enhanced chatbot. How can I help you today?");
+// TChatBot - Intelligent AI Assistant
+class TChatBot {
+    constructor() {
+        this.conversationHistory = [];
+        this.isVoiceEnabled = true;
+        this.synth = window.speechSynthesis;
+        this.userContext = new Map();
+        this.knowledgeBase = this.initializeKnowledge();
+        this.geminiApiKey = localStorage.getItem('geminiApiKey') || null;
+        this.useAI = this.geminiApiKey !== null;
+        
+        this.init();
     }
-  
-    // Set up emoji picker
-    const emojiBtn = document.getElementById('emoji-btn');
-    let picker;
     
-    // Load emoji picker async
-    Promise.all([
-      import('https://cdn.jsdelivr.net/npm/@emoji-mart/data'),
-      import('https://cdn.jsdelivr.net/npm/@emoji-mart/js')
-    ]).then(([{ default: EmojiData }, { Picker }]) => {
-      picker = new Picker({
-        data: EmojiData,
-        onEmojiSelect: (emoji) => {
-          const input = document.getElementById('input');
-          input.value += emoji.native;
-          input.focus();
-        },
-        theme: localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'
-      });
-  
-      emojiBtn.addEventListener('click', (e) => {
-        picker.togglePicker(e.currentTarget);
-      });
-    }).catch(error => {
-      console.error('Error loading emoji picker:', error);
-      emojiBtn.style.display = 'none';
-    });
-  
-    // Theme toggle
-    const themeToggle = document.querySelector('.theme-toggle');
-    themeToggle.addEventListener('click', toggleTheme);
-  
-    // Set initial theme
-    if (localStorage.getItem('theme') === 'dark') {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-    } else {
-      document.documentElement.setAttribute('data-theme', 'light');
-      themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    initializeKnowledge() {
+        return {
+            programming: {
+                javascript: {
+                    basics: "JavaScript is a versatile programming language used for web development. It runs in browsers and servers (Node.js).",
+                    variables: "Variables in JS: let name = 'value'; const PI = 3.14; var old = 'legacy';",
+                    functions: "Functions: function name() {} or const name = () => {} (arrow function)",
+                    examples: {
+                        hello: "console.log('Hello World!');",
+                        function: "function greet(name) { return `Hello, ${name}!`; }",
+                        array: "const arr = [1, 2, 3]; arr.map(x => x * 2);",
+                        object: "const obj = { name: 'John', age: 30 };"
+                    }
+                },
+                python: {
+                    basics: "Python is a high-level, interpreted language known for its simplicity and readability.",
+                    variables: "Variables: name = 'value', pi = 3.14, numbers = [1, 2, 3]",
+                    functions: "Functions: def function_name(param): return result",
+                    examples: {
+                        hello: "print('Hello World!')",
+                        function: "def greet(name):\n    return f'Hello, {name}!'",
+                        list: "numbers = [1, 2, 3]\nsquared = [x**2 for x in numbers]"
+                    }
+                }
+            },
+            science: {
+                physics: "Physics studies matter, energy, and their interactions in the universe.",
+                chemistry: "Chemistry explores the composition, structure, and properties of substances.",
+                biology: "Biology is the study of living organisms and their vital processes.",
+                math: "Mathematics is the abstract science of number, quantity, and space."
+            },
+            general: {
+                ai: "AI (Artificial Intelligence) enables machines to simulate human intelligence and learning.",
+                technology: "Technology encompasses tools, systems, and methods to solve problems and improve life.",
+                internet: "The Internet is a global network connecting billions of devices worldwide."
+            },
+            ai_services: {
+                gemini: {
+                    description: "Google's Gemini AI is a powerful multimodal AI that can understand text, images, audio, and video.",
+                    usage: "To use Gemini AI:\n• Visit ai.google.dev or bard.google.com\n• Get API key from Google AI Studio\n• Use Gemini API in your applications\n• Available models: Gemini Pro, Gemini Pro Vision",
+                    features: "Features:\n• Text generation and conversation\n• Image analysis and description\n• Code generation and debugging\n• Multimodal understanding\n• Real-time responses"
+                },
+                integration: {
+                    steps: "To integrate AI APIs:\n1. Choose AI service (OpenAI, Gemini, Claude)\n2. Get API credentials\n3. Install SDK or use REST API\n4. Handle authentication\n5. Make API calls in your code",
+                    example: "Basic API integration example:\n```javascript\nconst response = await fetch('https://api.example.com/chat', {\n  method: 'POST',\n  headers: { 'Authorization': 'Bearer YOUR_API_KEY' },\n  body: JSON.stringify({ message: 'Hello AI!' })\n});\n```"
+                }
+            }
+        };
     }
-  
-    // Input field event listeners
-    const inputField = document.getElementById('input');
-    inputField.addEventListener('keydown', function(e) {
-      if (e.code === 'Enter') {
-        sendMessage();
-      }
-    });
-  });
-  
-  function toggleTheme() {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const themeToggle = document.querySelector('.theme-toggle');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     
-    document.documentElement.setAttribute('data-theme', newTheme);
-    themeToggle.innerHTML = newTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-    localStorage.setItem('theme', newTheme);
-    
-    // Update emoji picker theme if it exists
-    if (window.picker) {
-      window.picker.updateTheme(newTheme);
+    init() {
+        this.setupEventListeners();
+        this.loadConversationHistory();
+        this.initializeChat();
+        this.setupTheme();
     }
-  }
-  
-  function sendMessage() {
-    const inputField = document.getElementById('input');
-    let input = inputField.value.trim();
     
-    if (input !== '') {
-      addChat('user', input);
-      inputField.value = '';
-      
-      // Show typing indicator
-      showTypingIndicator();
-      
-      // Simulate thinking delay
-      setTimeout(() => {
-        hideTypingIndicator();
-        output(input);
-      }, 1000 + Math.random() * 2000);
+    setupEventListeners() {
+        const input = document.getElementById('input');
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                this.sendMessage();
+            }
+        });
+        
+        input.addEventListener('input', (e) => {
+            this.updateCharCount(e.target.value.length);
+        });
+        
+        document.querySelector('.theme-toggle').addEventListener('click', () => this.toggleTheme());
+        document.querySelector('.clear-chat').addEventListener('click', () => this.clearChat());
+        document.querySelector('.voice-toggle').addEventListener('click', () => this.toggleVoice());
+        
+        // Add API key setup
+        this.setupApiKeyInput();
+        
+        document.querySelectorAll('.quick-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const message = e.target.dataset.message;
+                if (message) {
+                    document.getElementById('input').value = message;
+                    this.sendMessage();
+                }
+            });
+        });
     }
-  }
-  
-  function showTypingIndicator() {
-    document.querySelector('.typing-indicator').style.display = 'flex';
-    scrollToBottom();
-  }
-  
-  function hideTypingIndicator() {
-    document.querySelector('.typing-indicator').style.display = 'none';
-  }
-  
-  function output(input) {
-    let product;
-    let text = input.toLowerCase().replace(/[^\w\s\d]/gi, '');
-  
-    // Enhanced text processing
-    text = text
-      .replace(/[\W_]/g, ' ')
-      .replace(/\s+/g, ' ')
-      .replace(/i feel /g, '')
-      .replace(/whats/g, 'what is')
-      .replace(/please /g, '')
-      .replace(/ please/g, '')
-      .replace(/r u /g, 'are you ')
-      .trim();
-  
-    // Check for exact matches first
-    let comparedText = compare(userMessage, botReply, text);
-  
-    // If no exact match, try to find similar messages
-    product = comparedText 
-      ? comparedText 
-      : findSimilarResponse(text) || alternative[Math.floor(Math.random() * alternative.length)];
     
-    addChat('bot', product);
-    saveConversation();
-  }
-  
-  function compare(triggerArray, replyArray, string) {
-    let item;
-    for (let x = 0; x < triggerArray.length; x++) {
-      for (let y = 0; y < triggerArray[x].length; y++) {
-        if (triggerArray[x][y] === string) {
-          items = replyArray[x];
-          item = items[Math.floor(Math.random() * items.length)];
-          return item;
+    initializeChat() {
+        if (this.conversationHistory.length === 0) {
+            const welcomeMsg = this.useAI ? 
+                "Hello! I'm TChatBot powered by Gemini AI. I can help with anything you need!" :
+                "Hello! I'm TChatBot. Add your Gemini API key in settings to unlock AI features, or chat with my built-in responses!";
+            this.addMessage('bot', welcomeMsg);
+        } else {
+            this.renderConversationHistory();
         }
-      }
-    }
-    return null;
-  }
-  
-  function findSimilarResponse(string) {
-    // Check for greetings
-    if (/(hi|hello|hey|greetings|mwaramutse)/i.test(string)) {
-      return botReply[0][Math.floor(Math.random() * botReply[0].length)];
     }
     
-    // Check for thanks
-    if (/(thanks|thank you|appreciate)/i.test(string)) {
-      return botReply[16][Math.floor(Math.random() * botReply[16].length)];
+    sendMessage() {
+        const input = document.getElementById('input');
+        const message = input.value.trim();
+        
+        if (!message) return;
+        
+        this.addMessage('user', message);
+        input.value = '';
+        this.updateCharCount(0);
+        
+        this.showTypingIndicator();
+        
+        setTimeout(async () => {
+            this.hideTypingIndicator();
+            let response;
+            
+            if (this.useAI && this.geminiApiKey) {
+                try {
+                    response = await this.getGeminiResponse(message);
+                } catch (error) {
+                    response = "Sorry, I'm having trouble connecting to AI. Using built-in responses: " + this.generateIntelligentResponse(message);
+                }
+            } else {
+                response = this.generateIntelligentResponse(message);
+            }
+            
+            this.addMessage('bot', response);
+        }, 800 + Math.random() * 1200);
     }
     
-    // Check for goodbyes
-    if (/(bye|goodbye|see you|later)/i.test(string)) {
-      return botReply[29][Math.floor(Math.random() * botReply[29].length)];
+    generateIntelligentResponse(message) {
+        const analysis = this.analyzeMessage(message);
+        
+        // Store context for future reference
+        this.updateUserContext(analysis);
+        
+        // Handle simple commands and actions
+        if (/^(go|start|begin|continue|next)$/i.test(message.trim())) {
+            return this.handleActionCommand(message);
+        }
+        
+        // Generate contextual response
+        if (analysis.intent === 'greeting') {
+            return this.handleGreeting(analysis);
+        }
+        
+        if (analysis.intent === 'programming') {
+            return this.handleProgrammingQuery(analysis);
+        }
+        
+        if (analysis.intent === 'math') {
+            return this.handleMathQuery(analysis);
+        }
+        
+        if (analysis.intent === 'science') {
+            return this.handleScienceQuery(analysis);
+        }
+        
+        if (analysis.intent === 'explanation') {
+            return this.handleExplanationRequest(analysis);
+        }
+        
+        if (analysis.intent === 'ai_integration') {
+            return this.handleAIIntegrationQuery(analysis);
+        }
+        
+        if (analysis.intent === 'personal') {
+            return this.handlePersonalQuery(analysis);
+        }
+        
+        if (analysis.intent === 'gratitude') {
+            return "You're very welcome! I'm here to help whenever you need assistance. What else can I explain or help you with?";
+        }
+        
+        if (analysis.intent === 'goodbye') {
+            return "Goodbye! It's been great helping you today. Feel free to return anytime you have questions!";
+        }
+        
+        // Intelligent fallback with context
+        return this.generateContextualFallback(analysis);
     }
     
-    // Check for math problems
-    const mathMatch = string.match(/(\d+)\s*([+\-*/])\s*(\d+)/);
-    if (mathMatch) {
-      const num1 = parseInt(mathMatch[1]);
-      const num2 = parseInt(mathMatch[3]);
-      const operator = mathMatch[2];
-      
-      let result;
-      switch (operator) {
-        case '+': result = num1 + num2; break;
-        case '-': result = num1 - num2; break;
-        case '*': result = num1 * num2; break;
-        case '/': result = num1 / num2; break;
-        default: return null;
-      }
-      
-      return `The answer is ${result}!`;
+    analyzeMessage(message) {
+        const lowerMessage = message.toLowerCase();
+        const words = lowerMessage.split(/\s+/);
+        
+        const analysis = {
+            original: message,
+            words: words,
+            intent: 'unknown',
+            topics: [],
+            entities: [],
+            sentiment: 'neutral',
+            complexity: this.assessComplexity(message)
+        };
+        
+        // Intent detection
+        if (/\b(hi|hello|hey|greetings)\b/.test(lowerMessage)) {
+            analysis.intent = 'greeting';
+        } else if (/\b(code|programming|javascript|js|python|html|css|function|variable|class|loop|array|object)\b/.test(lowerMessage)) {
+            analysis.intent = 'programming';
+            analysis.topics = this.extractProgrammingTopics(lowerMessage);
+        } else if (/\b(\d+\s*[\+\-\*\/\^]\s*\d+|calculate|math|equation|solve)\b/.test(lowerMessage)) {
+            analysis.intent = 'math';
+        } else if (/\b(science|physics|chemistry|biology)\b/.test(lowerMessage)) {
+            analysis.intent = 'science';
+            analysis.topics = this.extractScienceTopics(lowerMessage);
+        } else if (/\b(gemini|api|integrate|use ai)\b/.test(lowerMessage)) {
+            analysis.intent = 'ai_integration';
+        } else if (/\b(explain|tell me about|what is|how does|why|describe)\b/.test(lowerMessage)) {
+            analysis.intent = 'explanation';
+        } else if (/\b(who are you|your name|about you|created you)\b/.test(lowerMessage)) {
+            analysis.intent = 'personal';
+        } else if (/\b(thank|thanks|appreciate)\b/.test(lowerMessage)) {
+            analysis.intent = 'gratitude';
+        } else if (/\b(bye|goodbye|see you|farewell)\b/.test(lowerMessage)) {
+            analysis.intent = 'goodbye';
+        }
+        
+        return analysis;
     }
     
-    return null;
-  }
-  
-  function addChat(sender, message) {
-    const mainDiv = document.getElementById('message-section');
-    const messageDiv = document.createElement('div');
-    messageDiv.id = sender;
-    messageDiv.classList.add('message');
-    
-    // Add timestamp
-    const now = new Date();
-    const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    
-    if (sender === 'user') {
-      messageDiv.innerHTML = `
-        <span id="user-response">${message}</span>
-        <div class="timestamp">${timeString}</div>
-      `;
-      conversationHistory.push({ sender: 'user', message, time: timeString });
-    } else {
-      messageDiv.innerHTML = `
-        <span id="bot-response">${message}</span>
-        <div class="timestamp">${timeString}</div>
-      `;
-      conversationHistory.push({ sender: 'bot', message, time: timeString });
+    extractProgrammingTopics(message) {
+        const topics = [];
+        if (/javascript|js/.test(message)) topics.push('javascript');
+        if (/python/.test(message)) topics.push('python');
+        if (/function/.test(message)) topics.push('functions');
+        if (/variable/.test(message)) topics.push('variables');
+        if (/array|list/.test(message)) topics.push('arrays');
+        if (/object/.test(message)) topics.push('objects');
+        if (/add|sum|math/.test(message)) topics.push('math_operations');
+        return topics;
     }
     
-    mainDiv.appendChild(messageDiv);
-    scrollToBottom();
-    
-    // Speak the bot's response
-    if (sender === 'bot') {
-      voiceControl(message);
+    extractScienceTopics(message) {
+        const topics = [];
+        if (/physics/.test(message)) topics.push('physics');
+        if (/chemistry/.test(message)) topics.push('chemistry');
+        if (/biology/.test(message)) topics.push('biology');
+        if (/math/.test(message)) topics.push('math');
+        return topics;
     }
-  }
-  
-  function renderChatHistory() {
-    const mainDiv = document.getElementById('message-section');
-    mainDiv.innerHTML = '';
     
-    conversationHistory.forEach(msg => {
-      const messageDiv = document.createElement('div');
-      messageDiv.id = msg.sender;
-      messageDiv.classList.add('message');
-      messageDiv.innerHTML = `
-        <span id="${msg.sender}-response">${msg.message}</span>
-        <div class="timestamp">${msg.time}</div>
-      `;
-      mainDiv.appendChild(messageDiv);
-    });
+    assessComplexity(message) {
+        const words = message.split(/\s+/).length;
+        const hasQuestions = /\?/.test(message);
+        const hasMultipleConcepts = /\band\b|\bor\b/.test(message.toLowerCase());
+        
+        if (words > 20 || hasMultipleConcepts) return 'high';
+        if (words > 10 || hasQuestions) return 'medium';
+        return 'low';
+    }
     
-    scrollToBottom();
-  }
-  
-  function saveConversation() {
-    localStorage.setItem('chatHistory', JSON.stringify(conversationHistory));
-  }
-  
-  function scrollToBottom() {
-    const messageSection = document.getElementById('message-section');
-    messageSection.scrollTop = messageSection.scrollHeight;
-  }
-  
-  function voiceControl(string) {
-    if (!synth || localStorage.getItem('speechDisabled') === 'true') return;
+    updateUserContext(analysis) {
+        const timestamp = Date.now();
+        this.userContext.set('lastIntent', analysis.intent);
+        this.userContext.set('lastTopics', analysis.topics);
+        this.userContext.set('lastTimestamp', timestamp);
+        
+        // Track conversation patterns
+        if (!this.userContext.has('interests')) {
+            this.userContext.set('interests', new Set());
+        }
+        analysis.topics.forEach(topic => {
+            this.userContext.get('interests').add(topic);
+        });
+    }
     
-    synth.cancel();
+    handleGreeting(analysis) {
+        const timeOfDay = new Date().getHours();
+        let greeting = "Hello!";
+        
+        if (timeOfDay < 12) greeting = "Good morning!";
+        else if (timeOfDay < 18) greeting = "Good afternoon!";
+        else greeting = "Good evening!";
+        
+        const interests = this.userContext.get('interests');
+        if (interests && interests.size > 0) {
+            const topicList = Array.from(interests).slice(0, 2).join(' and ');
+            return `${greeting} Great to see you again! I remember you were interested in ${topicList}. What would you like to explore today?`;
+        }
+        
+        return `${greeting} I'm TChatBot, ready to help you learn and solve problems. What's on your mind?`;
+    }
     
-    let utterance = new SpeechSynthesisUtterance(string);
-    utterance.lang = 'en-US';
-    utterance.rate = 1;
-    utterance.pitch = 1;
-    utterance.volume = 1;
-    synth.speak(utterance);
-  }
+    handleProgrammingQuery(analysis) {
+        const message = analysis.original.toLowerCase();
+        const topics = analysis.topics;
+        
+        // Handle specific Python requests
+        if (topics.includes('python') || /python/.test(message)) {
+            const kb = this.knowledgeBase.programming.python;
+            
+            if (/add.*number|addition|sum/.test(message)) {
+                return `Here's how to add two numbers in Python:\n\n\`\`\`python\n# Simple addition\nnum1 = 5\nnum2 = 3\nresult = num1 + num2\nprint(f"{num1} + {num2} = {result}")\n\n# Function to add numbers\ndef add_numbers(a, b):\n    return a + b\n\n# Usage\nsum_result = add_numbers(10, 15)\nprint(f"Sum: {sum_result}")\n\`\`\`\n\nPython makes math operations simple and readable!`;
+            }
+            
+            if (/example|show|code/.test(message)) {
+                return `Python example:\n\n\`\`\`python\n${kb.examples.hello}\n\`\`\`\n\n${kb.basics}`;
+            }
+            
+            return `${kb.basics}\n\nBasics:\n• ${kb.variables}\n• ${kb.functions}\n\nWhat would you like to learn about Python?`;
+        }
+        
+        // Handle JavaScript requests
+        if (topics.includes('javascript') || /javascript|js/.test(message)) {
+            const kb = this.knowledgeBase.programming.javascript;
+            
+            if (/function/.test(message)) {
+                return `Here's a JavaScript function example:\n\n\`\`\`javascript\n${kb.examples.function}\n\`\`\`\n\n${kb.functions}`;
+            }
+            
+            if (/array/.test(message)) {
+                return `JavaScript array example:\n\n\`\`\`javascript\n${kb.examples.array}\n\`\`\`\n\nArrays are versatile data structures in JavaScript.`;
+            }
+            
+            return `${kb.basics}\n\nKey concepts:\n• ${kb.variables}\n• ${kb.functions}\n\nWould you like to see specific examples?`;
+        }
+        
+        return "I can help you with programming! I'm knowledgeable about JavaScript, Python, and many other languages. What specific programming topic interests you?";
+    }
+    
+    handleMathQuery(analysis) {
+        // Enhanced math solving
+        const mathMatch = analysis.original.match(/(\d+(?:\.\d+)?)\s*([\+\-\*\/\^])\s*(\d+(?:\.\d+)?)/);
+        if (mathMatch) {
+            const num1 = parseFloat(mathMatch[1]);
+            const operator = mathMatch[2];
+            const num2 = parseFloat(mathMatch[3]);
+            
+            let result, explanation;
+            switch (operator) {
+                case '+':
+                    result = num1 + num2;
+                    explanation = `Adding ${num1} and ${num2}`;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    explanation = `Subtracting ${num2} from ${num1}`;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    explanation = `Multiplying ${num1} by ${num2}`;
+                    break;
+                case '/':
+                    if (num2 === 0) return "I can't divide by zero! That's undefined in mathematics.";
+                    result = num1 / num2;
+                    explanation = `Dividing ${num1} by ${num2}`;
+                    break;
+                case '^':
+                    result = Math.pow(num1, num2);
+                    explanation = `Raising ${num1} to the power of ${num2}`;
+                    break;
+            }
+            
+            return `${explanation}:\n**${num1} ${operator} ${num2} = ${result}**\n\nNeed help with more complex math problems?`;
+        }
+        
+        return "I can solve math problems! Try asking me something like '15 * 7' or 'What's 100 / 4?'. I can also explain mathematical concepts.";
+    }
+    
+    handleScienceQuery(analysis) {
+        const topics = analysis.topics;
+        const kb = this.knowledgeBase.science;
+        
+        if (topics.includes('physics')) {
+            return `${kb.physics}\n\nPhysics covers mechanics, thermodynamics, electromagnetism, quantum mechanics, and relativity. What aspect of physics interests you?`;
+        } else if (topics.includes('chemistry')) {
+            return `${kb.chemistry}\n\nChemistry includes organic, inorganic, physical, and analytical chemistry. What would you like to know?`;
+        } else if (topics.includes('biology')) {
+            return `${kb.biology}\n\nBiology encompasses genetics, ecology, anatomy, physiology, and evolution. Any specific area you'd like to explore?`;
+        }
+        
+        return "Science is fascinating! I can discuss physics, chemistry, biology, and mathematics. What scientific topic would you like to explore?";
+    }
+    
+    handleExplanationRequest(analysis) {
+        const message = analysis.original.toLowerCase();
+        
+        // AI and technology explanations
+        if (/\bai\b|artificial intelligence/.test(message)) {
+            return `${this.knowledgeBase.general.ai}\n\nAI includes machine learning, neural networks, natural language processing, and computer vision. It's transforming how we interact with technology!`;
+        }
+        
+        if (/gemini|google ai|bard/.test(message)) {
+            const gemini = this.knowledgeBase.ai_services.gemini;
+            return `**Google Gemini AI**\n\n${gemini.description}\n\n**${gemini.usage}**\n\n**${gemini.features}**\n\nWould you like help integrating Gemini into your project?`;
+        }
+        
+        if (/api integration|use ai|integrate ai/.test(message)) {
+            const integration = this.knowledgeBase.ai_services.integration;
+            return `**AI API Integration Guide**\n\n${integration.steps}\n\n${integration.example}\n\nWhich AI service are you interested in integrating?`;
+        }
+        
+        if (/internet|web/.test(message)) {
+            return `${this.knowledgeBase.general.internet}\n\nThe Internet uses protocols like HTTP, TCP/IP, and DNS to enable communication between devices worldwide.`;
+        }
+        
+        // Provide intelligent context-based explanation
+        const lastTopics = this.userContext.get('lastTopics') || [];
+        if (lastTopics.length > 0) {
+            return `Based on our conversation about ${lastTopics.join(' and ')}, could you be more specific about what you'd like me to explain? I can provide detailed information on many topics!`;
+        }
+        
+        return "I'd be happy to explain! I can break down complex topics in programming, science, technology, and more. What specifically would you like me to explain?";
+    }
+    
+    handlePersonalQuery(analysis) {
+        if (/name/.test(analysis.original.toLowerCase())) {
+            return "I'm TChatBot! I'm an intelligent AI assistant designed to help you learn, solve problems, and have meaningful conversations.";
+        }
+        
+        if (/created|made/.test(analysis.original.toLowerCase())) {
+            return "I was created by Theophile NIYIGABA as an intelligent conversational AI. I'm designed to be helpful, knowledgeable, and engaging!";
+        }
+        
+        return "I'm TChatBot, an AI assistant focused on being genuinely helpful. I love learning from our conversations and helping you explore new topics!";
+    }
+    
+    handleAIIntegrationQuery(analysis) {
+        const message = analysis.original.toLowerCase();
+        
+        if (/gemini/.test(message)) {
+            const gemini = this.knowledgeBase.ai_services.gemini;
+            return `**Google Gemini AI Setup**\n\n${gemini.description}\n\n**How to get started:**\n${gemini.usage}\n\n**Key capabilities:**\n${gemini.features}\n\nNeed help with specific integration steps?`;
+        }
+        
+        if (/api|integrate/.test(message)) {
+            const integration = this.knowledgeBase.ai_services.integration;
+            return `**AI Integration Guide**\n\n${integration.steps}\n\n**Code Example:**\n${integration.example}\n\nPopular AI APIs:\n• **OpenAI GPT** - Text generation\n• **Google Gemini** - Multimodal AI\n• **Anthropic Claude** - Conversational AI\n\nWhich one interests you?`;
+        }
+        
+        return "I can help you integrate AI services! What specifically would you like to know about:\n\n🤖 **Gemini AI** - Google's multimodal AI\n🔧 **API Integration** - How to connect AI services\n💻 **Code Examples** - Implementation guides\n\nWhat's your goal?";
+    }
+    
+    handleActionCommand(message) {
+        const cmd = message.toLowerCase().trim();
+        
+        if (cmd === 'go') {
+            return "Let's go! What would you like to explore?\n\n• **Programming** - JavaScript, Python, coding help\n• **Math** - Calculations, problem solving\n• **Science** - Physics, chemistry, biology\n• **General** - Explanations, learning, Q&A\n\nJust ask me anything!";
+        }
+        
+        return "Ready to help! What topic interests you most today?";
+    }
+    
+    generateContextualFallback(analysis) {
+        const message = analysis.original.toLowerCase();
+        
+        // Check for specific topics in the message
+        if (/learn|study|understand/.test(message)) {
+            return "I'd love to help you learn! I can explain concepts in:\n\n• **Programming** (JavaScript, Python, web dev)\n• **Mathematics** (algebra, calculus, statistics)\n• **Science** (physics, chemistry, biology)\n• **Technology** (AI, computers, internet)\n\nWhat subject interests you?";
+        }
+        
+        if (/help|assist|support/.test(message)) {
+            return "I'm here to help! I can assist with:\n\n✓ Solving problems step-by-step\n✓ Explaining complex concepts simply\n✓ Providing code examples\n✓ Answering questions on many topics\n\nWhat do you need help with?";
+        }
+        
+        if (/work|project|build|create/.test(message)) {
+            return "Working on something interesting? I can help with:\n\n🔧 **Programming projects** - Code, debugging, best practices\n📊 **Problem solving** - Math, logic, analysis\n📚 **Research** - Explanations, concepts, learning\n\nTell me about your project!";
+        }
+        
+        // Default intelligent response
+        const interests = this.userContext.get('interests');
+        if (interests && interests.size > 0) {
+            const topicList = Array.from(interests).slice(0, 2).join(' and ');
+            return `Based on your interest in ${topicList}, what specific aspect would you like to explore further? I can provide detailed explanations and examples!`;
+        }
+        
+        return "I'm ready to help with any topic! Try asking me about:\n\n💻 Programming questions\n🧮 Math problems\n🔬 Science concepts\n💡 General explanations\n\nWhat's on your mind?";
+    }
+    
+    addMessage(sender, message) {
+        const messageSection = document.getElementById('message-section');
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', sender);
+        
+        const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        
+        messageDiv.innerHTML = `
+            <div class="message-content">${this.formatMessage(message)}</div>
+            <div class="timestamp">${timestamp}</div>
+        `;
+        
+        messageSection.appendChild(messageDiv);
+        this.scrollToBottom();
+        
+        this.conversationHistory.push({ sender, message, timestamp });
+        this.saveConversationHistory();
+        
+        if (sender === 'bot' && this.isVoiceEnabled) {
+            this.speak(message);
+        }
+    }
+    
+    formatMessage(message) {
+        message = message.replace(/```(\w+)?\n?([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
+        message = message.replace(/`([^`]+)`/g, '<code>$1</code>');
+        message = message.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        message = message.replace(/\n/g, '<br>');
+        return message;
+    }
+    
+    showTypingIndicator() {
+        document.querySelector('.typing-indicator').style.display = 'flex';
+        this.scrollToBottom();
+    }
+    
+    hideTypingIndicator() {
+        document.querySelector('.typing-indicator').style.display = 'none';
+    }
+    
+    scrollToBottom() {
+        const messageSection = document.getElementById('message-section');
+        messageSection.scrollTop = messageSection.scrollHeight;
+    }
+    
+    updateCharCount(count) {
+        document.querySelector('.char-count').textContent = `${count}/500`;
+    }
+    
+    toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        
+        const themeIcon = document.querySelector('.theme-toggle i');
+        themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        
+        localStorage.setItem('theme', newTheme);
+    }
+    
+    toggleVoice() {
+        this.isVoiceEnabled = !this.isVoiceEnabled;
+        const voiceIcon = document.querySelector('.voice-toggle i');
+        voiceIcon.className = this.isVoiceEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
+        
+        localStorage.setItem('voiceEnabled', this.isVoiceEnabled);
+    }
+    
+    setupApiKeyInput() {
+        // Add API key button to controls
+        const controlsPanel = document.querySelector('.controls-panel');
+        const apiKeyBtn = document.createElement('div');
+        apiKeyBtn.className = 'api-key-toggle';
+        apiKeyBtn.title = 'Setup Gemini API';
+        apiKeyBtn.innerHTML = '<i class="fas fa-key"></i>';
+        apiKeyBtn.addEventListener('click', () => this.showApiKeyDialog());
+        controlsPanel.appendChild(apiKeyBtn);
+    }
+    
+    showApiKeyDialog() {
+        const apiKey = prompt('Enter your Gemini API key:\n\nGet it from: https://ai.google.dev/', this.geminiApiKey || '');
+        
+        if (apiKey !== null) {
+            if (apiKey.trim()) {
+                this.geminiApiKey = apiKey.trim();
+                this.useAI = true;
+                localStorage.setItem('geminiApiKey', this.geminiApiKey);
+                this.addMessage('bot', '🤖 Gemini AI activated! I can now provide more intelligent responses.');
+            } else {
+                this.geminiApiKey = null;
+                this.useAI = false;
+                localStorage.removeItem('geminiApiKey');
+                this.addMessage('bot', 'AI features disabled. Using built-in responses.');
+            }
+        }
+    }
+    
+    async getGeminiResponse(message) {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${this.geminiApiKey}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                contents: [{
+                    parts: [{
+                        text: `You are TChatBot, a helpful AI assistant. Respond naturally and helpfully to: ${message}`
+                    }]
+                }]
+            })
+        });
+        
+        if (!response.ok) {
+            throw new Error('API request failed');
+        }
+        
+        const data = await response.json();
+        return data.candidates[0].content.parts[0].text;
+    }
+    
+    clearChat() {
+        if (confirm('Clear conversation history?')) {
+            this.conversationHistory = [];
+            this.userContext.clear();
+            document.getElementById('message-section').innerHTML = '';
+            localStorage.removeItem('chatHistory');
+            const welcomeMsg = this.useAI ? 
+                "Hello! I'm TChatBot powered by Gemini AI. What can I help you with?" :
+                "Hello! I'm TChatBot. Add your Gemini API key to unlock AI features!";
+            this.addMessage('bot', welcomeMsg);
+        }
+    }
+    
+    speak(text) {
+        if (!this.synth || !this.isVoiceEnabled) return;
+        
+        this.synth.cancel();
+        const cleanText = text.replace(/<[^>]*>/g, '').replace(/```[\s\S]*?```/g, 'code example');
+        
+        const utterance = new SpeechSynthesisUtterance(cleanText);
+        utterance.rate = 0.9;
+        utterance.pitch = 1;
+        utterance.volume = 0.8;
+        
+        this.synth.speak(utterance);
+    }
+    
+    setupTheme() {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        const themeIcon = document.querySelector('.theme-toggle i');
+        themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    }
+    
+    saveConversationHistory() {
+        localStorage.setItem('chatHistory', JSON.stringify(this.conversationHistory));
+    }
+    
+    loadConversationHistory() {
+        const saved = localStorage.getItem('chatHistory');
+        if (saved) {
+            this.conversationHistory = JSON.parse(saved);
+        }
+    }
+    
+    renderConversationHistory() {
+        const messageSection = document.getElementById('message-section');
+        messageSection.innerHTML = '';
+        
+        this.conversationHistory.forEach(msg => {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', msg.sender);
+            messageDiv.innerHTML = `
+                <div class="message-content">${this.formatMessage(msg.message)}</div>
+                <div class="timestamp">${msg.timestamp}</div>
+            `;
+            messageSection.appendChild(messageDiv);
+        });
+        
+        this.scrollToBottom();
+    }
+}
+
+// Initialize TChatBot
+document.addEventListener('DOMContentLoaded', () => {
+    window.chatBot = new TChatBot();
+});
+
+function sendMessage() {
+    if (window.chatBot) {
+        window.chatBot.sendMessage();
+    }
+}

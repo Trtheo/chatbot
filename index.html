@@ -1,44 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>TChat</title>
+    <title>TChatBot</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="TChatBot - Your intelligent conversation partner" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
-  <div class="theme-toggle">
-    <i class="fas fa-moon"></i>
+  <div class="controls-panel">
+    <div class="theme-toggle" title="Toggle theme">
+      <i class="fas fa-moon"></i>
+    </div>
+    <div class="clear-chat" title="Clear conversation">
+      <i class="fas fa-trash"></i>
+    </div>
+    <div class="voice-toggle" title="Toggle voice">
+      <i class="fas fa-volume-up"></i>
+    </div>
   </div>
+  
   <div class="card">
     <div id="header">
       <div class="bot-avatar">
-        <i class="fas fa-robot"></i>
+        <i class="fas fa-brain"></i>
       </div>
-      <div>
-        <h1>TChat</h1>
-        <p class="status">Online</p>
+      <div class="header-info">
+        <h1>TChatBot</h1>
+        <p class="status"><span class="status-dot"></span>Online & Ready</p>
       </div>
     </div>
+    
     <div id="message-section">
-      <div class="message" id="bot">
-        <span id="bot-response">Hello! I'm your enhanced chatbot. How can I help you today?</span>
-      </div>
+      <!-- Messages will be dynamically added here -->
     </div>
+    
     <div class="typing-indicator">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <div id="input-section">
-      <button class="emoji-btn" id="emoji-btn">😊</button>
-      <input id="input" type="text" placeholder="Type a message here..." autocomplete="off" />
-      <div class="send-btn" onclick="sendMessage()">
-        <i class="fas fa-paper-plane"></i>
+      <div class="typing-dots">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
+      <span class="typing-text">AI is thinking...</span>
+    </div>
+    
+    <div class="quick-actions">
+      <button class="quick-btn" data-message="Tell me a joke">😄 Joke</button>
+      <button class="quick-btn" data-message="What can you help me with?">❓ Help</button>
+      <button class="quick-btn" data-message="Tell me an interesting fact">🧠 Fact</button>
+    </div>
+    
+    <div id="input-section">
+      <button class="emoji-btn" id="emoji-btn" title="Add emoji">
+        <i class="fas fa-smile"></i>
+      </button>
+      <div class="input-wrapper">
+        <input id="input" type="text" placeholder="Ask me anything..." autocomplete="off" maxlength="500" />
+        <div class="char-count">0/500</div>
+      </div>
+      <button class="send-btn" onclick="sendMessage()" title="Send message">
+        <i class="fas fa-paper-plane"></i>
+      </button>
     </div>
   </div>
+  
+  <div class="loading-overlay" id="loading">
+    <div class="spinner"></div>
+  </div>
+  
   <script src="https://cdn.jsdelivr.net/npm/@emoji-mart/data"></script>
   <script src="https://cdn.jsdelivr.net/npm/@emoji-mart/js"></script>
   <script src="./js/script.js"></script>
